@@ -17,7 +17,7 @@ output: html_document
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-6">
 
-# **CWIDM practicum**
+# **Statistics for Communication Science**
 
 This website contains the material used for the practicals of CWIDM (a pre-master course of Communication Science of the Vrije Universiteit Amsterdam). This page is hosted on Github as it is commonly used among data scientists to show their code so it can be worthwhile getting used to this format. Moreover, it is one of the most visually appealing ways, in my humble opinion, to share code. The template for this site was made based on the following video: [https://www.youtube.com/watch?v=nc7XhQrasCM&t=914s](https://www.youtube.com/watch?v=nc7XhQrasCM&t=914s).
 

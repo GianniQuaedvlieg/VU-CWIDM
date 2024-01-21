@@ -1,6 +1,6 @@
-name: "MyLabJournal"
+name: "CWIDM"
 navbar:
-  title: "MyLabJournal"
+  title: "Home"
   left:
     - text: "Home"
       href: index.html
