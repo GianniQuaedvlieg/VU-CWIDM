@@ -1,5 +1,5 @@
 ---
-title: "MyLabJournal"
+title: "Communicatiewetenschapper in de maak"
 output: html_document
 ---
 
@@ -17,27 +17,15 @@ output: html_document
 <div class="row" style="padding-top: 30px;">
 <div class="col-sm-6">
 
-# **My Lab Journal**
+# **CWIDM practicum**
 
-This is a template example for lab journaling. Students in Matt Crump's Human Cognition and Performance Lab will use this template to learn R, and other things. Students can replace this text with more fun things. People not in my lab can use this too.
-
-## How to use
-
-1. fork the repo for this website and follow instructions on read me to get set up. [https://github.com/CrumpLab/LabJournalWebsite](https://github.com/CrumpLab/LabJournalWebsite)
-
-2. Blog/journal what you are doing in R, by editing the Journal.Rmd. See the [Journal page](https://crumplab.github.io/LabJournalWebsite/Journal.html) for an example of what to do to get started learning R.
-
-3. See the [links page](https://crumplab.github.io/LabJournalWebsite/Links.html) for lots of helpful links on learning R.
-
-4. Change everything to make it your own.
-
+This website contains the material used for the practicals of CWIDM (a pre-master course of Communication Science of the Vrije Universiteit Amsterdam). This page is hosted on Github as it is commonly used among data scientists to show their code so it can be worthwhile getting used to this format. Moreover, it is one of the most visually appealing ways, in my humble opinion, to share code. The template for this site was made based on the following video: [https://www.youtube.com/watch?v=nc7XhQrasCM&t=914s](https://www.youtube.com/watch?v=nc7XhQrasCM&t=914s).
 
 </div>
 <div class="col-sm-6">
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
+### [Gianni Quaedvlieg](https://nl.linkedin.com/in/gianni-quaedvlieg-b0a138201)
 
-<a href = "https://crumplab.github.io">
 ![](images/logo.png)
 </a>
 </div>
