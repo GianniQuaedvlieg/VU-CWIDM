@@ -1,6 +1,12 @@
 ---
 title: "Practicals"
-output: html_document
+output: 
+html_document:
+  toc: true
+  toc_float: true
+  collapsed: false
+  number_sections: false
+  toc_depth: 1
 ---
 
 Last changes: `r Sys.Date()`
@@ -17,7 +23,7 @@ This week, we will need the following packages:
 
 Video:
 
--   Link to video reliability analysis:
+-   Link to video regression with mediation:
 
 Dataset:
 
