@@ -1,5 +1,5 @@
 ---
-title: "Journal"
+title: "Practicals"
 output:
   html_document:
     toc: true
@@ -16,14 +16,13 @@ knitr::opts_chunk$set(message=FALSE,warning=FALSE, cache=TRUE)
 
 IMPORTANT: You can delete everything in here and start fresh. You might want to start by not deleting anything above this line until you know what that stuff is doing.
 
-
 This is an .Rmd file. It is plain text with special features. Any time you write just like this, it will be compiled to normal text in the website. If you put a \# in front of your text, it will create a top level-header.
 
-# My first post
+# Practical 1 
 
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
+2018 \| 7 \| 23 Last compiled: `r Sys.Date()`
 
-Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left. 
+Notice that whatever you define as a top level header, automatically gets put into the table of contents bar on the left.
 
 ## Second level header
 
@@ -33,15 +32,39 @@ You can add more headers by adding more hashtags. These won't be put into the ta
 
 Here's an even lower level header
 
-# My second post (note the order)
+# Practical 2 
 
-2018 | 7 | 23 Last compiled: `r Sys.Date()`
+Last compiled: `r Sys.Date()`
 
-I'm writing this tutorial going from the top down. And, this is how it will be printed. So, notice the second post is second in the list. If you want your most recent post to be at the top, then make a new post starting at the top. If you want the oldest first, do, then keep adding to the bottom
+This week, you will learn how to conduct a linear regression with mediation. We will use the `lm`-function for this as well as Hayes-Process.
+
+This week, we will need the following packages:
+
+Video:
+
+-   Link to video regression with mediation:
+
+Dataset:
+
+-   You can download the dataset for this week here.
+
+Assignment:
+
+-   Assignment description:
+
+    -   [View PDF](CWIDM_files/CWIDM_practicum_2\_opdracht.pdf)
+
+    -   [Download PDF](CWIDM_files/CWIDM_practicum_2\_opdracht.pdf?raw=true)
+
+-   Assignment with answers
+
+-   Assignment script
+
+-   Assignment script and output (R-markdown)
 
 # Adding R stuff
 
-So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the sam place. 
+So far this is just a blog where you can write in plain text and serve your writing to a webpage. One of the main purposes of this lab journal is to record your progress learning R. The reason I am asking you to use this process is because you can both make a website, and a lab journal, and learn R all in R-studio. This makes everything really convenient and in the sam place.
 
 So, let's say you are learning how to make a histogram in R. For example, maybe you want to sample 100 numbers from a normal distribution with mean = 0, and standard deviation =1, and then you want to plot a histogram. You can do this right here by using an r code block, like this:
 
@@ -60,7 +83,7 @@ Use this lab journal to record what you do in R. This way I will be able to see 
 
 It's hard to learn programming when you don't have specific problems that you are trying to solve. Everything just seems abstract.
 
-I wrote an [introductory programming book that introduces R](https://crumplab.github.io/programmingforpsych/), and gives some [concrete problems for you to solve](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html). 
+I wrote an [introductory programming book that introduces R](https://crumplab.github.io/programmingforpsych/), and gives some [concrete problems for you to solve](https://crumplab.github.io/programmingforpsych/programming-challenges-i-learning-the-fundamentals.html).
 
 To get the hang of journaling and solving the problems to learn programming, my suggestion is that you use this .Rmd file to solve the problems. It would look like this:
 
