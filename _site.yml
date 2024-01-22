@@ -5,5 +5,5 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Practicals"
-      href: Links.html
+      href: Practicals.html
 output_dir: "docs"
