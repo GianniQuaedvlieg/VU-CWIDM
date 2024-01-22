@@ -31,22 +31,18 @@ Video:
 
 Dataset:
 
--   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset?raw=true).
+-   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
 
 Assignment:
 
 -   Assignment description:
 
-    -   [View PDF](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf)
-
-    -   [Download PDF](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf?raw=true)
+    -   [View Assignment](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf)
 
 -   Assignment with answers
 
-    -   [View PDF](files/CWIDM_practicum_2_antwoorden.pdf)
+    -   [View Answers](files/CWIDM_practicum_2_antwoorden.pdf)
 
-    -   [Download PDF](files/CWIDM_practicum_2_antwoorden.pdf?raw=true)
-
--   Assignment script
+-   You can download the R-script [here](files/CWIDM_practicum_2_script%20(2).R?raw=true).
 
 -   Assignment script and output (R-markdown)
