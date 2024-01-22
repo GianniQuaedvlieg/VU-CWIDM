@@ -269,33 +269,732 @@ $(document).ready(function () {
 </div>
 
 
-<p>Correlatiematrix maken test.</p>
-<div id="r-markdown" class="section level2">
-<h2>R Markdown</h2>
-<p>This is an R Markdown document. Markdown is a simple formatting
-syntax for authoring HTML, PDF, and MS Word documents. For more details
-on using R Markdown see <a href="http://rmarkdown.rstudio.com"
-class="uri">http://rmarkdown.rstudio.com</a>.</p>
-<p>When you click the <strong>Knit</strong> button a document will be
-generated that includes both content as well as the output of any
-embedded R code chunks within the document. You can embed an R code
-chunk like this:</p>
-<pre class="r"><code>summary(cars)</code></pre>
-<pre><code>##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00</code></pre>
+<div id="dataset-openen." class="section level3">
+<h3><strong>Dataset openen.</strong></h3>
+<pre class="r"><code>library(tidyverse)
+getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/gianniquaedvlieg/Documents/GitHub/VU-CWIDM&quot;</code></pre>
+<pre class="r"><code>setwd(&quot;/Users/gianniquaedvlieg/Documents/GitHub/VU-CWIDM/files&quot;) 
+url &lt;- &quot;CWIDM_practicum_2_dataset.csv&quot; 
+D &lt;- read_csv(url)</code></pre>
+<pre><code>## Rows: 234 Columns: 7
+## ── Column specification ──────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (7): SuWB, Prestatietevredenheid, Lichaamstevredenheid, Extraversion, Ne...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>D</code></pre>
+<pre><code>## # A tibble: 234 × 7
+##     SuWB Prestatietevredenheid Lichaamstevredenheid Extraversion Neuroticism
+##    &lt;dbl&gt;                 &lt;dbl&gt;                &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+##  1  3.25                 NA                    3.62         4           4.56
+##  2  3.25                  2.57                 3.5          4.5         3.89
+##  3  3                     3.43                 3            4.12        4.22
+##  4  3.38                  3.86                 2.5          3.25        4.67
+##  5  4.25                  4.71                 4.75         6           2.44
+##  6  4.12                  3.43                 4.12         4.25        4.11
+##  7  2.25                  3.86                 1.12         3.5         3.78
+##  8  4                    NA                    4            4           4   
+##  9  2.5                   3.29                 3.88         2.5         4.89
+## 10  4                     3.71                 4.12         4.62        3.11
+## # ℹ 224 more rows
+## # ℹ 2 more variables: Zelfver &lt;dbl&gt;, Dummy_typeblootstelling &lt;dbl&gt;</code></pre>
 </div>
-<div id="including-plots" class="section level2">
-<h2>Including Plots</h2>
-<p>You can also embed plots, for example:</p>
-<p><img src="Practicum_2_markdown_files/figure-html/pressure-1.png" width="672" /></p>
-<p>Note that the <code>echo = FALSE</code> parameter was added to the
-code chunk to prevent printing of the R code that generated the
-plot.</p>
+<div
+id="opdracht-1-voer-beschrijvende-en-verkennende-analyses-uit-bij-deze-steekproef."
+class="section level3">
+<h3><strong>Opdracht 1: Voer beschrijvende en verkennende analyses uit
+bij deze steekproef.</strong></h3>
+<p>Voordat we de daadwerkelijke data-analyse beginnen is het goed om
+verkennende analyses uit te voeren om een beter idee te krijgen van onze
+dataset. Voor een frequentie-analyse uit en maak een correlatiematrix.
+Zorg dat je hiermee de volgende vragen kan beantwoorden. Rond af op 1
+decimaal.</p>
+<pre class="r"><code>library(psych)
+corr.test(D, alpha = T)</code></pre>
+<pre><code>## Call:corr.test(x = D, alpha = T)
+## Correlation matrix 
+##                          SuWB Prestatietevredenheid Lichaamstevredenheid
+## SuWB                     1.00                  0.47                 0.44
+## Prestatietevredenheid    0.47                  1.00                 0.10
+## Lichaamstevredenheid     0.44                  0.10                 1.00
+## Extraversion             0.61                  0.42                 0.56
+## Neuroticism             -0.67                 -0.31                -0.56
+## Zelfver                  0.44                  0.40                 0.35
+## Dummy_typeblootstelling -0.17                 -0.14                -0.26
+##                         Extraversion Neuroticism Zelfver
+## SuWB                            0.61       -0.67    0.44
+## Prestatietevredenheid           0.42       -0.31    0.40
+## Lichaamstevredenheid            0.56       -0.56    0.35
+## Extraversion                    1.00       -0.74    0.57
+## Neuroticism                    -0.74        1.00   -0.49
+## Zelfver                         0.57       -0.49    1.00
+## Dummy_typeblootstelling        -0.45        0.31   -0.46
+##                         Dummy_typeblootstelling
+## SuWB                                      -0.17
+## Prestatietevredenheid                     -0.14
+## Lichaamstevredenheid                      -0.26
+## Extraversion                              -0.45
+## Neuroticism                                0.31
+## Zelfver                                   -0.46
+## Dummy_typeblootstelling                    1.00
+## Sample Size 
+##                         SuWB Prestatietevredenheid Lichaamstevredenheid
+## SuWB                     234                   205                  234
+## Prestatietevredenheid    205                   205                  205
+## Lichaamstevredenheid     234                   205                  234
+## Extraversion             234                   205                  234
+## Neuroticism              234                   205                  234
+## Zelfver                  234                   205                  234
+## Dummy_typeblootstelling   83                    71                   83
+##                         Extraversion Neuroticism Zelfver
+## SuWB                             234         234     234
+## Prestatietevredenheid            205         205     205
+## Lichaamstevredenheid             234         234     234
+## Extraversion                     234         234     234
+## Neuroticism                      234         234     234
+## Zelfver                          234         234     234
+## Dummy_typeblootstelling           83          83      83
+##                         Dummy_typeblootstelling
+## SuWB                                         83
+## Prestatietevredenheid                        71
+## Lichaamstevredenheid                         83
+## Extraversion                                 83
+## Neuroticism                                  83
+## Zelfver                                      83
+## Dummy_typeblootstelling                      83
+## Probability values (Entries above the diagonal are adjusted for multiple tests.) 
+##                         SuWB Prestatietevredenheid Lichaamstevredenheid
+## SuWB                    0.00                  0.00                 0.00
+## Prestatietevredenheid   0.00                  0.00                 0.37
+## Lichaamstevredenheid    0.00                  0.14                 0.00
+## Extraversion            0.00                  0.00                 0.00
+## Neuroticism             0.00                  0.00                 0.00
+## Zelfver                 0.00                  0.00                 0.00
+## Dummy_typeblootstelling 0.12                  0.24                 0.02
+##                         Extraversion Neuroticism Zelfver
+## SuWB                               0           0       0
+## Prestatietevredenheid              0           0       0
+## Lichaamstevredenheid               0           0       0
+## Extraversion                       0           0       0
+## Neuroticism                        0           0       0
+## Zelfver                            0           0       0
+## Dummy_typeblootstelling            0           0       0
+##                         Dummy_typeblootstelling
+## SuWB                                       0.37
+## Prestatietevredenheid                      0.37
+## Lichaamstevredenheid                       0.07
+## Extraversion                               0.00
+## Neuroticism                                0.02
+## Zelfver                                    0.00
+## Dummy_typeblootstelling                    0.00
+## 
+##  To see confidence intervals of the correlations, print with the short=FALSE option</code></pre>
+</div>
+<div id="opdracht-2-lineaire-regressieanalyse." class="section level3">
+<h3><strong>Opdracht 2: Lineaire regressieanalyse.</strong></h3>
+<p>We gaan nu onze eerste daadwerkelijke hypothesetoetsing uitvoeren. In
+dit geval willen we weten of iemands prestatietevredenheid en
+lichaamstevredenheid invloed hebben op het subjectieve welzijn dit
+individu. Daarbij willen we ook weten welk effect sterker is. Voer
+hiervoor zowel een ongestandaardiseerde als een gestandaardiseerde
+lineaire regressieanalyse uit.</p>
+<p>Eerst voeren we een ‘gewone’ lineaire regressie uit:</p>
+<pre class="r"><code>regr1 &lt;- lm(SuWB ~ Lichaamstevredenheid + Prestatietevredenheid, data = D)
+summary(regr1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = SuWB ~ Lichaamstevredenheid + Prestatietevredenheid, 
+##     data = D)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.03327 -0.40482  0.04932  0.38474  2.29383 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            0.81876    0.22339   3.665 0.000316 ***
+## Lichaamstevredenheid   0.34175    0.04566   7.484 2.18e-12 ***
+## Prestatietevredenheid  0.39938    0.05150   7.756 4.25e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.7282 on 202 degrees of freedom
+##   (29 observations deleted due to missingness)
+## Multiple R-squared:  0.3907, Adjusted R-squared:  0.3847 
+## F-statistic: 64.77 on 2 and 202 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Indien we het betrouwbaarheidsinterval willen weten kunnen we dat
+extra aangeven:</p>
+<pre class="r"><code>confint(regr1, level = 0.95)</code></pre>
+<pre><code>##                           2.5 %    97.5 %
+## (Intercept)           0.3782880 1.2592360
+## Lichaamstevredenheid  0.2517106 0.4317814
+## Prestatietevredenheid 0.2978414 0.5009186</code></pre>
+<p>Om het allemaal wat overzichtelijker te maken kunnen we het
+texreg-package gebruiken met de code screenreg. Let op: hier ontbreekt
+wel de nodige informatie.</p>
+<pre class="r"><code>library(texreg)</code></pre>
+<pre><code>## Version:  1.39.3
+## Date:     2023-11-09
+## Author:   Philip Leifeld (University of Essex)
+## 
+## Consider submitting praise using the praise or praise_interactive functions.
+## Please cite the JSS article in your publications -- see citation(&quot;texreg&quot;).</code></pre>
+<pre><code>## 
+## Attaching package: &#39;texreg&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     extract</code></pre>
+<pre class="r"><code>table &lt;- screenreg(regr1) 
+table</code></pre>
+<pre><code>## 
+## =================================
+##                        Model 1   
+## ---------------------------------
+## (Intercept)              0.82 ***
+##                         (0.22)   
+## Lichaamstevredenheid     0.34 ***
+##                         (0.05)   
+## Prestatietevredenheid    0.40 ***
+##                         (0.05)   
+## ---------------------------------
+## R^2                      0.39    
+## Adj. R^2                 0.38    
+## Num. obs.              205       
+## =================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+<p>Indien je juist de gestandaardiseerde waarden mee wil krijgen (handig
+wanneer je effect-sterktes met elkaar wil vergelijken).</p>
+<pre class="r"><code>library(rockchalk)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rockchalk&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     summarize</code></pre>
+<pre class="r"><code>regr1_st &lt;- standardize(regr1) 
+summary(regr1_st) </code></pre>
+<pre><code>## All variables in the model matrix and the dependent variable
+## were centered. The centered variables have the letter &quot;s&quot; appended to their
+## non-centered counterparts, even constructed
+## variables like `x1:x2` and poly(x1,2). We agree, that&#39;s probably
+## ill-advised, but you asked for it by running standardize().
+## 
+## The rockchalk function meanCenter is a smarter option, probably. 
+## 
+## The summary statistics of the variables in the design matrix. 
+##                        mean std.dev.
+## SuWBs                     0        1
+## Lichaamstevredenheids     0        1
+## Prestatietevredenheids    0        1
+## 
+## Call:
+## lm(formula = SuWBs ~ -1 + Lichaamstevredenheids + Prestatietevredenheids, 
+##     data = stddat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.19019 -0.43607  0.05312  0.41444  2.47087 
+## 
+## Coefficients:
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## Lichaamstevredenheids   0.41325    0.05508   7.503 1.92e-12 ***
+## Prestatietevredenheids  0.42823    0.05508   7.775 3.72e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.7825 on 203 degrees of freedom
+## Multiple R-squared:  0.3907, Adjusted R-squared:  0.3847 
+## F-statistic: 65.09 on 2 and 203 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Dezelfde stappen die we hiervoor hebben doorlopen kunnen gelukkig ook
+gewoon met de gestandaardiseerde versie van onze regressie.</p>
+<pre class="r"><code>confint(regr1_st, level = 0.95)</code></pre>
+<pre><code>##                            2.5 %    97.5 %
+## Lichaamstevredenheids  0.3046451 0.5218469
+## Prestatietevredenheids 0.3196257 0.5368275</code></pre>
+<pre class="r"><code>table &lt;- screenreg(regr1_st)</code></pre>
+<pre><code>## Warning: The `tidy()` method for objects of class `stdreg` is not maintained by the broom team, and is only supported through the `lm` tidier method. Please be cautious in interpreting and reporting broom output.
+## 
+## This warning is displayed once per session.</code></pre>
+<pre class="r"><code>table</code></pre>
+<pre><code>## 
+## ===================================
+##                         Model 1    
+## -----------------------------------
+## Lichaamstevredenheids      0.41 ***
+##                           (0.06)   
+## Prestatietevredenheids     0.43 ***
+##                           (0.06)   
+## -----------------------------------
+## R^2                        0.39    
+## Adj. R^2                   0.38    
+## Sigma                      0.78    
+## Statistic                 65.09    
+## P Value                    0.00    
+## DF                         2.00    
+## Log Likelihood          -239.59    
+## AIC                      485.19    
+## BIC                      495.15    
+## Deviance                 124.29    
+## DF Resid.                203       
+## nobs                     205       
+## ===================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+<div id="opdracht-3-multipele-lineaire-regressieanalyse."
+class="section level3">
+<h3><strong>Opdracht 3: Multipele lineaire
+regressieanalyse.</strong></h3>
+<p>Omdat betere uitspraken te kunnen doen over causale relaties willen
+we bij een vragenlijstonderzoek zo veel mogelijk variabelen toevoegen
+waarvan we verwachten dat deze een effect hebben op het subjectieve
+welzijn van een individu. In dit geval verwachten wij, als onderzoekers,
+dat ook de persoonlijkheidskenmerken neuroticisme en extraversie een
+effect hebben op het subjectieve welzijn van individuen. Voer nu een
+lineaire regressieanalyse3 uit met de 4 hiervoor genoemde onafhankelijke
+variabelen en subjectief welzijn als afhankelijke variabele. Zorg dat
+deze analyses overzichtelijk in één tabel worden weergegeven in R.</p>
+<p>Hier doe we hetzelfde als hiervoor maar dan met extra variabelen.</p>
+<pre class="r"><code>regr2 &lt;- lm(SuWB ~ Lichaamstevredenheid + Prestatietevredenheid  + Extraversion + Neuroticism, data = D)
+summary(regr2)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = SuWB ~ Lichaamstevredenheid + Prestatietevredenheid + 
+##     Extraversion + Neuroticism, data = D)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -2.11219 -0.40873  0.00407  0.33699  2.36076 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            3.86764    0.60178   6.427 9.34e-10 ***
+## Lichaamstevredenheid   0.10626    0.04967   2.139   0.0336 *  
+## Prestatietevredenheid  0.26514    0.04931   5.377 2.10e-07 ***
+## Extraversion           0.06672    0.08324   0.801   0.4238    
+## Neuroticism           -0.47076    0.07228  -6.513 5.82e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.626 on 200 degrees of freedom
+##   (29 observations deleted due to missingness)
+## Multiple R-squared:  0.5542, Adjusted R-squared:  0.5453 
+## F-statistic: 62.16 on 4 and 200 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Hier kunnen we de twee regressies mooi vergelijken zonder lastig heen
+en weer te moeten scrollen. We moeten de functie list toevoegen omdat we
+hier met twee verschillende variabelen aan het werk zijn.</p>
+<pre class="r"><code>table &lt;- screenreg(list(regr1, regr2))
+table</code></pre>
+<pre><code>## 
+## =============================================
+##                        Model 1     Model 2   
+## ---------------------------------------------
+## (Intercept)              0.82 ***    3.87 ***
+##                         (0.22)      (0.60)   
+## Lichaamstevredenheid     0.34 ***    0.11 *  
+##                         (0.05)      (0.05)   
+## Prestatietevredenheid    0.40 ***    0.27 ***
+##                         (0.05)      (0.05)   
+## Extraversion                         0.07    
+##                                     (0.08)   
+## Neuroticism                         -0.47 ***
+##                                     (0.07)   
+## ---------------------------------------------
+## R^2                      0.39        0.55    
+## Adj. R^2                 0.38        0.55    
+## Num. obs.              205         205       
+## =============================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+<p>Hier kunnen we ook echt kijken of een model significant beter is dan
+het andere model.</p>
+<pre class="r"><code>anova(regr1, regr2)</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: SuWB ~ Lichaamstevredenheid + Prestatietevredenheid
+## Model 2: SuWB ~ Lichaamstevredenheid + Prestatietevredenheid + Extraversion + 
+##     Neuroticism
+##   Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1    202 107.118                                  
+## 2    200  78.373  2    28.744 36.676 2.696e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="opdracht-4-lineaire-regressie-met-een-dichotome-variabele."
+class="section level3">
+<h3><strong>Opdracht 4: Lineaire regressie met een dichotome
+variabele.</strong></h3>
+<p>Nu we weten op welke manier verschillende persoonskenmerken en
+verschillende vormen van tevredenheid samenhangen met iemands
+subjectieve welzijn willen we ook weten welke invloed externe factoren
+kunnen hebben op een onderdeel van iemands welbevinden. Daarom hebben de
+onderzoekers onder een deel van de steekproef een experiment uitgevoerd
+waarbij de participanten aselect over de twee verschillende condities
+van Instagram blootstelling werden verdeeld. In één conditie kregen de
+participanten een post te zien met een model met een realistisch
+lichaamsbeeld (body positivity post) en in de andere conditie kregen de
+participanten een post te zien met een onrealistisch lichaamsbeeld
+(ideaal lichaamstype Instagram post). Omdat de onderzoekers verwachtten
+dat iemands subjectieve welzijn niet direct van een dergelijke post
+aangepast zal worden hebben ze een ietwat volatiel onderdeel van iemands
+subjectieve welbevinden geanalyseerd; iemands zelfvertrouwen. Voer nu
+een lineaire regressieanalyse uit waarbij deze experimentele conditie de
+onafhankelijke variabele is en zelfvertrouwen de afhankelijke
+variabele.</p>
+<p>Voor dummy_variabelen werkt dit niets anders.</p>
+<pre class="r"><code>regr3 &lt;- lm(Zelfver ~ Dummy_typeblootstelling, data = D)
+summary(regr3)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Zelfver ~ Dummy_typeblootstelling, data = D)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.4318 -0.9487  0.0513  1.0513  4.5682 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               6.4318     0.2176  29.563  &lt; 2e-16 ***
+## Dummy_typeblootstelling  -1.4831     0.3174  -4.673 1.17e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.443 on 81 degrees of freedom
+##   (151 observations deleted due to missingness)
+## Multiple R-squared:  0.2123, Adjusted R-squared:  0.2026 
+## F-statistic: 21.84 on 1 and 81 DF,  p-value: 1.167e-05</code></pre>
+<pre class="r"><code>table &lt;- screenreg(regr3)
+table</code></pre>
+<pre><code>## 
+## ==================================
+##                          Model 1  
+## ----------------------------------
+## (Intercept)               6.43 ***
+##                          (0.22)   
+## Dummy_typeblootstelling  -1.48 ***
+##                          (0.32)   
+## ----------------------------------
+## R^2                       0.21    
+## Adj. R^2                  0.20    
+## Num. obs.                83       
+## ==================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+<div id="opdracht-5-lineaire-regressie-met-mediatie."
+class="section level3">
+<h3><strong>Opdracht 5: Lineaire regressie met mediatie.</strong></h3>
+<p>Wij, als onderzoekers, verwachten dat deze relatie tussen het type
+blootstelling en iemands zelfvertrouwen (deels) verklaard kan worden
+door verschillende vormen van iemands tevredenheid. Oftewel,
+lichaamstevredenheid en prestatietevredenheid zijn volgens onze
+verwachting mediërende variabelen in de relatie tussen type
+blootstelling en zelfvertrouwen. Middels verschillende lineaire
+regressies kunnen wij achterhalen of dit het geval is door gebruik te
+maken van de Baron en Kenny-methode4. Voer de verschillende lineaire
+regressieanalyses uit.</p>
+<pre class="r"><code>regr4 &lt;- lm(Zelfver ~ Dummy_typeblootstelling, data = D) # c
+regr5 &lt;- lm(Zelfver ~ Dummy_typeblootstelling + Lichaamstevredenheid, data = D) #c&#39; en b
+regr6 &lt;- lm(Lichaamstevredenheid ~ Dummy_typeblootstelling, data = D) #a
+summary(regr4)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Zelfver ~ Dummy_typeblootstelling, data = D)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.4318 -0.9487  0.0513  1.0513  4.5682 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               6.4318     0.2176  29.563  &lt; 2e-16 ***
+## Dummy_typeblootstelling  -1.4831     0.3174  -4.673 1.17e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.443 on 81 degrees of freedom
+##   (151 observations deleted due to missingness)
+## Multiple R-squared:  0.2123, Adjusted R-squared:  0.2026 
+## F-statistic: 21.84 on 1 and 81 DF,  p-value: 1.167e-05</code></pre>
+<pre class="r"><code>summary(regr5)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Zelfver ~ Dummy_typeblootstelling + Lichaamstevredenheid, 
+##     data = D)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.2598 -0.9479  0.1836  1.0362  4.4945 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               5.3259     0.4402  12.099  &lt; 2e-16 ***
+## Dummy_typeblootstelling  -1.2468     0.3153  -3.954 0.000165 ***
+## Lichaamstevredenheid      0.3932     0.1378   2.853 0.005517 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.383 on 80 degrees of freedom
+##   (151 observations deleted due to missingness)
+## Multiple R-squared:  0.2851, Adjusted R-squared:  0.2672 
+## F-statistic: 15.95 on 2 and 80 DF,  p-value: 1.482e-06</code></pre>
+<pre class="r"><code>summary(regr6)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Lichaamstevredenheid ~ Dummy_typeblootstelling, 
+##     data = D)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.8125 -0.8365 -0.2115  0.9255  3.2885 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               2.8125     0.1681   16.73   &lt;2e-16 ***
+## Dummy_typeblootstelling  -0.6010     0.2453   -2.45   0.0164 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.115 on 81 degrees of freedom
+##   (151 observations deleted due to missingness)
+## Multiple R-squared:  0.06901,    Adjusted R-squared:  0.05751 
+## F-statistic: 6.004 on 1 and 81 DF,  p-value: 0.01643</code></pre>
+<pre class="r"><code>table &lt;- screenreg(list(regr4, regr5)) 
+table</code></pre>
+<pre><code>## 
+## =============================================
+##                          Model 1    Model 2  
+## ---------------------------------------------
+## (Intercept)               6.43 ***   5.33 ***
+##                          (0.22)     (0.44)   
+## Dummy_typeblootstelling  -1.48 ***  -1.25 ***
+##                          (0.32)     (0.32)   
+## Lichaamstevredenheid                 0.39 ** 
+##                                     (0.14)   
+## ---------------------------------------------
+## R^2                       0.21       0.29    
+## Adj. R^2                  0.20       0.27    
+## Num. obs.                83         83       
+## =============================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+<pre class="r"><code>table &lt;- screenreg(regr6)
+table</code></pre>
+<pre><code>## 
+## ==================================
+##                          Model 1  
+## ----------------------------------
+## (Intercept)               2.81 ***
+##                          (0.17)   
+## Dummy_typeblootstelling  -0.60 *  
+##                          (0.25)   
+## ----------------------------------
+## R^2                       0.07    
+## Adj. R^2                  0.06    
+## Num. obs.                83       
+## ==================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+<p>Omdat we hier missende waarden hebben werkt het wat anders.</p>
+<pre class="r"><code>regr7 &lt;- lm(Zelfver ~ Dummy_typeblootstelling, data = filter(D, !is.na(Prestatietevredenheid))) # c
+regr8 &lt;- lm(Zelfver ~ Dummy_typeblootstelling + Prestatietevredenheid, data = filter(D, !is.na(Prestatietevredenheid))) #c&#39; en b
+regr9 &lt;- lm(Prestatietevredenheid ~ Dummy_typeblootstelling, data = filter(D, !is.na(Prestatietevredenheid))) #a
+summary(regr7)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Zelfver ~ Dummy_typeblootstelling, data = filter(D, 
+##     !is.na(Prestatietevredenheid)))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.4722 -0.9143  0.0857  1.0857  4.5278 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               6.4722     0.2504  25.850  &lt; 2e-16 ***
+## Dummy_typeblootstelling  -1.5579     0.3566  -4.369 4.31e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.502 on 69 degrees of freedom
+##   (134 observations deleted due to missingness)
+## Multiple R-squared:  0.2167, Adjusted R-squared:  0.2053 
+## F-statistic: 19.09 on 1 and 69 DF,  p-value: 4.306e-05</code></pre>
+<pre class="r"><code>summary(regr8)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Zelfver ~ Dummy_typeblootstelling + Prestatietevredenheid, 
+##     data = filter(D, !is.na(Prestatietevredenheid)))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.8189 -1.0108 -0.1679  1.1484  4.1280 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               4.0638     0.7989   5.087 3.07e-06 ***
+## Dummy_typeblootstelling  -1.4061     0.3389  -4.149 9.51e-05 ***
+## Prestatietevredenheid     0.6143     0.1947   3.155  0.00239 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.413 on 68 degrees of freedom
+##   (134 observations deleted due to missingness)
+## Multiple R-squared:  0.3167, Adjusted R-squared:  0.2966 
+## F-statistic: 15.76 on 2 and 68 DF,  p-value: 2.38e-06</code></pre>
+<pre class="r"><code>summary(regr9)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Prestatietevredenheid ~ Dummy_typeblootstelling, 
+##     data = filter(D, !is.na(Prestatietevredenheid)))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.9592 -0.4399 -0.2064  0.4694  2.7936 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)               3.9206     0.1456  26.918   &lt;2e-16 ***
+## Dummy_typeblootstelling  -0.2472     0.2074  -1.191    0.238    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.8739 on 69 degrees of freedom
+##   (134 observations deleted due to missingness)
+## Multiple R-squared:  0.02016,    Adjusted R-squared:  0.005959 
+## F-statistic:  1.42 on 1 and 69 DF,  p-value: 0.2375</code></pre>
+<pre class="r"><code>table &lt;- screenreg(list(regr7, regr8)) 
+table</code></pre>
+<pre><code>## 
+## =============================================
+##                          Model 1    Model 2  
+## ---------------------------------------------
+## (Intercept)               6.47 ***   4.06 ***
+##                          (0.25)     (0.80)   
+## Dummy_typeblootstelling  -1.56 ***  -1.41 ***
+##                          (0.36)     (0.34)   
+## Prestatietevredenheid                0.61 ** 
+##                                     (0.19)   
+## ---------------------------------------------
+## R^2                       0.22       0.32    
+## Adj. R^2                  0.21       0.30    
+## Num. obs.                71         71       
+## =============================================
+## *** p &lt; 0.001; ** p &lt; 0.01; * p &lt; 0.05</code></pre>
+</div>
+<div id="opdracht-6-mediatie-middels-process." class="section level2">
+<h2><strong>Opdracht 6: Mediatie middels Process.</strong></h2>
+<p>Hoewel de Baron en Kenny een mooi inzicht geeft in hoe een mediatie
+werkt is het niet de makkelijkste, meest complete en meest correcte
+methode om een mediatie uit te voeren. Zo weten we bijvoorbeeld niet of
+het algehele indirecte effect (a*b) significant is. Gelukkig is er een
+methode waarmee we op een makkelijke manier een mediatie kunnen
+uitvoeren en inzicht krijgen in de significantie van het indirecte
+effect: Process. Onderzoek nu middels Process of het effect van type
+blootstelling op zelfvertrouwen wordt verklaard door iemands
+levenstevredenheid.</p>
+<pre class="r"><code>library(bruceR)</code></pre>
+<pre><code>## 
+## bruceR (v2023.9)
+## Broadly Useful Convenient and Efficient R functions
+## 
+## Packages also loaded:
+## ✔ data.table ✔ emmeans
+## ✔ dplyr      ✔ lmerTest
+## ✔ tidyr      ✔ effectsize
+## ✔ stringr    ✔ performance
+## ✔ ggplot2    ✔ interactions
+## 
+## Main functions of `bruceR`:
+## cc()             Describe()  TTEST()
+## add()            Freq()      MANOVA()
+## .mean()          Corr()      EMMEANS()
+## set.wd()         Alpha()     PROCESS()
+## import()         EFA()       model_summary()
+## print_table()    CFA()       lavaan_summary()
+## 
+## For full functionality, please install all dependencies:
+## install.packages(&quot;bruceR&quot;, dep=TRUE)
+## 
+## Online documentation:
+## https://psychbruce.github.io/bruceR
+## 
+## To use this package in publications, please cite:
+## Bao, H.-W.-S. (2023). bruceR: Broadly useful convenient and efficient R functions (Version 2023.9) [Computer software]. https://CRAN.R-project.org/package=bruceR</code></pre>
+<pre><code>## 
+## These packages are dependencies of `bruceR` but not installed:
+## - pacman, ggtext, see, lmtest, vars, phia, BayesFactor, GGally
+## 
+## ***** Install all dependencies *****
+## install.packages(&quot;bruceR&quot;, dep=TRUE)</code></pre>
+<pre class="r"><code>PROCESS(D, y = &quot;Zelfver&quot;, x = &quot;Dummy_typeblootstelling&quot;, meds = &quot;Prestatietevredenheid&quot;)</code></pre>
+<pre><code>## 
+## ****************** PART 1. Regression Model Summary ******************
+## 
+## PROCESS Model Code : 4 (Hayes, 2018; www.guilford.com/p/hayes3)
+## PROCESS Model Type : Simple Mediation
+## -    Outcome (Y) : Zelfver
+## -  Predictor (X) : Dummy_typeblootstelling
+## -  Mediators (M) : Prestatietevredenheid
+## - Moderators (W) : -
+## - Covariates (C) : -
+## -   HLM Clusters : -
+## 
+## All numeric predictors have been grand-mean centered.
+## (For details, please see the help page of PROCESS.)
+## 
+## Formula of Mediator:
+## -    Prestatietevredenheid ~ Dummy_typeblootstelling
+## Formula of Outcome:
+## -    Zelfver ~ Dummy_typeblootstelling + Prestatietevredenheid
+## 
+## CAUTION:
+##   Fixed effect (coef.) of a predictor involved in an interaction
+##   denotes its &quot;simple effect/slope&quot; at the other predictor = 0.
+##   Only when all predictors in an interaction are mean-centered
+##   can the fixed effect denote the &quot;main effect&quot;!
+##   
+## Model Summary
+## 
+## ────────────────────────────────────────────────────────────────────────────
+##                          (1) Zelfver  (2) Prestatietevredenheid  (3) Zelfver
+## ────────────────────────────────────────────────────────────────────────────
+## (Intercept)               5.704 ***    3.799 ***                  5.704 *** 
+##                          (0.178)      (0.104)                    (0.168)    
+## Dummy_typeblootstelling  -1.558 ***   -0.247                     -1.406 *** 
+##                          (0.357)      (0.207)                    (0.339)    
+## Prestatietevredenheid                                             0.614 **  
+##                                                                  (0.195)    
+## ────────────────────────────────────────────────────────────────────────────
+## R^2                       0.217        0.020                      0.317     
+## Adj. R^2                  0.205        0.006                      0.297     
+## Num. obs.                71           71                         71         
+## ────────────────────────────────────────────────────────────────────────────
+## Note. * p &lt; .05, ** p &lt; .01, *** p &lt; .001.
+## 
+## ************ PART 2. Mediation/Moderation Effect Estimate ************
+## 
+## Package Use : ‘mediation’ (v4.5.0)
+## Effect Type : Simple Mediation (Model 4)
+## Sample Size : 71 (163 missing observations deleted)
+## Random Seed : set.seed()
+## Simulations : 100 (Bootstrap)</code></pre>
+<pre><code>## 
+## Warning: nsim=1000 (or larger) is suggested!</code></pre>
+<pre><code>## 
+## Running 100 simulations...
+## Indirect Path: &quot;Dummy_typeblootstelling&quot; (X) ==&gt; &quot;Prestatietevredenheid&quot; (M) ==&gt; &quot;Zelfver&quot; (Y)
+## ───────────────────────────────────────────────────────────────
+##                Effect    S.E.      z     p        [Boot 95% CI]
+## ───────────────────────────────────────────────────────────────
+## Indirect (ab)  -0.152 (0.134) -1.133  .257     [-0.377,  0.049]
+## Direct (c&#39;)    -1.406 (0.308) -4.564 &lt;.001 *** [-1.931, -0.772]
+## Total (c)      -1.558 (0.330) -4.718 &lt;.001 *** [-2.099, -0.863]
+## ───────────────────────────────────────────────────────────────
+## Percentile Bootstrap Confidence Interval
+## (SE and CI are estimated based on 100 Bootstrap samples.)
+## 
+## Note. The results based on bootstrapping or other random processes
+## are unlikely identical to other statistical software (e.g., SPSS).
+## To make results reproducible, you need to set a seed (any number).
+## Please see the help page for details: help(PROCESS)
+## Ignore this note if you have already set a seed. :)</code></pre>
 </div>
 
 

@@ -24,7 +24,7 @@ This week, we will need the following packages:
 
 Video:
 
--   Link to video regression with mediation:
+-   Link to video reliability analysis with factoranalysis:
 
 Dataset:
 

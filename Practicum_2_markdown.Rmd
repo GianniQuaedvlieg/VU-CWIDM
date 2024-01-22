@@ -5,28 +5,171 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-Correlatiematrix maken test.  
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+### **Dataset openen.**
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+library(tidyverse)
+getwd()
+setwd("/Users/gianniquaedvlieg/Documents/GitHub/VU-CWIDM/files") 
+url <- "CWIDM_practicum_2_dataset.csv" 
+D <- read_csv(url)
+D
 ```
 
-## Including Plots
+### **Opdracht 1: Voer beschrijvende en verkennende analyses uit bij deze steekproef.**
 
-You can also embed plots, for example:
+Voordat we de daadwerkelijke data-analyse beginnen is het goed om verkennende analyses
+uit te voeren om een beter idee te krijgen van onze dataset. Voor een frequentie-analyse uit en maak een correlatiematrix. Zorg dat je hiermee de volgende vragen kan beantwoorden. Rond
+af op 1 decimaal.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+library(psych)
+corr.test(D, alpha = T)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### **Opdracht 2: Lineaire regressieanalyse.** 
+
+We gaan nu onze eerste daadwerkelijke hypothesetoetsing uitvoeren. In dit geval willen we
+weten of iemands prestatietevredenheid en lichaamstevredenheid invloed hebben op het
+subjectieve welzijn dit individu. Daarbij willen we ook weten welk effect sterker is. Voer
+hiervoor zowel een ongestandaardiseerde als een gestandaardiseerde lineaire regressieanalyse
+uit.
+
+Eerst voeren we een 'gewone' lineaire regressie uit: 
+
+```{r}
+regr1 <- lm(SuWB ~ Lichaamstevredenheid + Prestatietevredenheid, data = D)
+summary(regr1)
+```
+
+Indien we het betrouwbaarheidsinterval willen weten kunnen we dat extra aangeven: 
+
+```{r}
+confint(regr1, level = 0.95)
+```
+
+Om het allemaal wat overzichtelijker te maken kunnen we het texreg-package gebruiken met de code screenreg. Let op: hier ontbreekt wel de nodige informatie.
+
+```{r}
+library(texreg)
+table <- screenreg(regr1) 
+table
+```
+
+Indien je juist de gestandaardiseerde waarden mee wil krijgen (handig wanneer je effect-sterktes met elkaar wil vergelijken).
+
+```{r}
+library(rockchalk)
+regr1_st <- standardize(regr1) 
+summary(regr1_st) 
+```
+
+Dezelfde stappen die we hiervoor hebben doorlopen kunnen gelukkig ook gewoon met de gestandaardiseerde versie van onze regressie.  
+
+```{r}
+confint(regr1_st, level = 0.95)
+```
+
+```{r}
+table <- screenreg(regr1_st)
+table
+```
+
+### **Opdracht 3: Multipele lineaire regressieanalyse.**
+
+Omdat betere uitspraken te kunnen doen over causale relaties willen we bij een
+vragenlijstonderzoek zo veel mogelijk variabelen toevoegen waarvan we verwachten dat deze
+een effect hebben op het subjectieve welzijn van een individu. In dit geval verwachten wij, als onderzoekers, dat ook de persoonlijkheidskenmerken neuroticisme en extraversie een effect hebben op het subjectieve welzijn van individuen. Voer nu een lineaire regressieanalyse3 uit met de 4 hiervoor genoemde onafhankelijke variabelen en subjectief welzijn als afhankelijke variabele. Zorg dat deze analyses overzichtelijk in één tabel worden weergegeven in R.
+
+Hier doe we hetzelfde als hiervoor maar dan met extra variabelen. 
+
+```{r}
+regr2 <- lm(SuWB ~ Lichaamstevredenheid + Prestatietevredenheid  + Extraversion + Neuroticism, data = D)
+summary(regr2)
+```
+
+Hier kunnen we de twee regressies mooi vergelijken zonder lastig heen en weer te moeten scrollen. We moeten de functie list toevoegen omdat we hier met twee verschillende variabelen aan het werk zijn. 
+
+```{r}
+table <- screenreg(list(regr1, regr2))
+table
+```
+
+Hier kunnen we ook echt kijken of een model significant beter is dan het andere model. 
+
+```{r}
+anova(regr1, regr2)
+```
+
+### **Opdracht 4: Lineaire regressie met een dichotome variabele.**
+
+Nu we weten op welke manier verschillende persoonskenmerken en verschillende vormen van
+tevredenheid samenhangen met iemands subjectieve welzijn willen we ook weten welke
+invloed externe factoren kunnen hebben op een onderdeel van iemands welbevinden. Daarom
+hebben de onderzoekers onder een deel van de steekproef een experiment uitgevoerd waarbij
+de participanten aselect over de twee verschillende condities van Instagram blootstelling
+werden verdeeld. In één conditie kregen de participanten een post te zien met een model met
+een realistisch lichaamsbeeld (body positivity post) en in de andere conditie kregen de
+participanten een post te zien met een onrealistisch lichaamsbeeld (ideaal lichaamstype
+Instagram post). Omdat de onderzoekers verwachtten dat iemands subjectieve welzijn niet
+direct van een dergelijke post aangepast zal worden hebben ze een ietwat volatiel onderdeel
+van iemands subjectieve welbevinden geanalyseerd; iemands zelfvertrouwen. Voer nu een
+lineaire regressieanalyse uit waarbij deze experimentele conditie de onafhankelijke variabele is en zelfvertrouwen de afhankelijke variabele.
+
+Voor dummy_variabelen werkt dit niets anders. 
+
+```{r}
+regr3 <- lm(Zelfver ~ Dummy_typeblootstelling, data = D)
+summary(regr3)
+table <- screenreg(regr3)
+table
+```
+
+### **Opdracht 5: Lineaire regressie met mediatie.**
+
+Wij, als onderzoekers, verwachten dat deze relatie tussen het type blootstelling en iemands
+zelfvertrouwen (deels) verklaard kan worden door verschillende vormen van iemands
+tevredenheid. Oftewel, lichaamstevredenheid en prestatietevredenheid zijn volgens onze
+verwachting mediërende variabelen in de relatie tussen type blootstelling en zelfvertrouwen.
+Middels verschillende lineaire regressies kunnen wij achterhalen of dit het geval is door gebruik te maken van de Baron en Kenny-methode4. Voer de verschillende lineaire regressieanalyses uit.
+
+```{r}
+regr4 <- lm(Zelfver ~ Dummy_typeblootstelling, data = D) # c
+regr5 <- lm(Zelfver ~ Dummy_typeblootstelling + Lichaamstevredenheid, data = D) #c' en b
+regr6 <- lm(Lichaamstevredenheid ~ Dummy_typeblootstelling, data = D) #a
+summary(regr4)
+summary(regr5)
+summary(regr6)
+table <- screenreg(list(regr4, regr5)) 
+table
+table <- screenreg(regr6)
+table
+```
+
+Omdat we hier missende waarden hebben werkt het wat anders. 
+
+```{r}
+regr7 <- lm(Zelfver ~ Dummy_typeblootstelling, data = filter(D, !is.na(Prestatietevredenheid))) # c
+regr8 <- lm(Zelfver ~ Dummy_typeblootstelling + Prestatietevredenheid, data = filter(D, !is.na(Prestatietevredenheid))) #c' en b
+regr9 <- lm(Prestatietevredenheid ~ Dummy_typeblootstelling, data = filter(D, !is.na(Prestatietevredenheid))) #a
+summary(regr7)
+summary(regr8)
+summary(regr9)
+table <- screenreg(list(regr7, regr8)) 
+table
+```
+
+## **Opdracht 6: Mediatie middels Process.**
+Hoewel de Baron en Kenny een mooi inzicht geeft in hoe een mediatie werkt is het niet de
+makkelijkste, meest complete en meest correcte methode om een mediatie uit te voeren. Zo
+weten we bijvoorbeeld niet of het algehele indirecte effect (a*b) significant is. Gelukkig is er een methode waarmee we op een makkelijke manier een mediatie kunnen uitvoeren en inzicht krijgen in de significantie van het indirecte effect: Process. Onderzoek nu middels Process of het effect van type blootstelling op zelfvertrouwen wordt verklaard door iemands
+levenstevredenheid.
+
+```{r}
+library(bruceR)
+PROCESS(D, y = "Zelfver", x = "Dummy_typeblootstelling", meds = "Prestatietevredenheid")
+```
