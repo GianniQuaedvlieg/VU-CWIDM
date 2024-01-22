@@ -1,5 +1,5 @@
 ---
-title: "Practicum 2.Rmd"
+title: "Practicum 2"
 author: "Gianni Quaedvlieg"
 date: "`r Sys.Date()`"
 output: html_document
