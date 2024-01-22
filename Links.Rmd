@@ -43,7 +43,7 @@ Assignment:
 
     -   [View Answers](files/CWIDM_practicum_2_antwoorden.pdf)
 
--   You can download the R-script [here](files/CWIDM_practicum_2_script%20(2).R?raw=true).
+-   You can view the R-script [here](files/CWIDM_practicum_2_script%20(2).R).
 
--   You can download the assignment script and output (R-markdown) [here](Practicum_2_markdown.Rmd).
+-   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).
 
