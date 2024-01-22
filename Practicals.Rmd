@@ -28,7 +28,7 @@ Video:
 
 Dataset:
 
--   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
+-   You can download the dataset for this week [here](files/CWIDM_practicum_1_dataset.csv?raw=true).
 
 Assignment:
 
@@ -42,7 +42,7 @@ Assignment:
 
 -   You can view the R-script [here](files/CWIDM_practicum_2_script%20(2).R).
 
--   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).
+-   You can view the assignment script and output (R-markdown) [here](CWIDM_practicum_1_markdown.html).
 
 # Practical 2: Regression, mediation.
 
@@ -88,7 +88,7 @@ Video:
 
 Dataset:
 
--   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
+-   You can download the dataset for this week [here](files/CWIDM_practicum_3_dataset.csv?raw=true).
 
 Assignment:
 

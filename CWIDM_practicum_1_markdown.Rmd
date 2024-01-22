@@ -1,0 +1,129 @@
+---
+title: "Practicum 1"
+author: "Gianni Quaedvlieg"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### **Opdracht 1: R-omgeving naar wens maken.**
+
+Wanneer je R en Rstudio hebt gedownload en deze opent krijg je 3 verschillende schermen te zien. Als je een nieuw project wil beginnen kan je een nieuw script openen waardoor je 4 verschillende schermen te zien krijgt. Je kan een scherm groter of kleiner maken door met je muis de randen te verschuiven. Doorgaans zijn je script en de console2 de belangrijkste twee schermen die je tegelijkertijd de meeste aandacht wil geven.
+
+### **Opdracht 2: Dataset downloaden.** 
+
+Het is mogelijk om zelf een dataset in R aan te maken maar doorgaans werken wij met reeds bestaande data verzameld middels een extern programma (zoals Qualtrics). Voor de practica van dit vak hebben wij de datasets al opgeschoond (in practicum 5 leer je hoe je dit zelf kan doen) en omgezet naar een csv-bestand.
+
+```{r}
+
+library(tidyverse)
+getwd()
+setwd("/Users/gianniquaedvlieg/Documents/GitHub/VU-CWIDM/files")
+url <- "CWIDM_practicum_1_dataset.csv"
+D <- read_csv(url)
+D
+```
+
+
+### **Opdracht 3: Steefproef analyseren.**
+
+Om een gevoel voor de dataset te krijgen en te controleren of er geen gekke dingen gebeuren is het goed om te beginnen met wat beschrijvende analyses.
+```{r}
+
+```
+
+### **Opdracht 4: Correlatietabel maken.**
+
+Nu we een gevoel voor de dataset hebben willen we variabelen gaan maken van de verschillende items die een bepaald construct moeten meten. Als eerste stap is het daarom goed om te weten of de verschillende items sterk met elkaar samenhangen. Maak hiervoor een correlatiematrix aan in R tussen alle items die tevredenheid moeten meten (SATIS1: SATIS12).
+
+```{r}
+library(psych)
+corr.test(select(D, SATIS1:SATIS12), alpha = T)
+```
+
+### **Opdracht 5: Onderliggende structuur achterhalen.**
+
+Om de onderliggende structuur van de verschillende items te achterhalen gaan we een
+factoranalyse uitvoeren. Hierbij krijgen we een output waarbij R aangeeft of er onderliggende dimensies (factoren) zijn waarbij verschillende items per factor hoog onderling correleren. Voer een dergelijke factoranalyse uit voor de verschillende SATIS-items. Voer hierbij een factoranalyse met ‘principal axis factoring’ uit met een ‘direct oblimin’ rotatie. 
+
+Eerst willen we achterhalen hoe veel onderliggende dimensies er in de dataset aanwezig zijn.
+
+```{r}
+print(fa.parallel(select(D, SATIS1 : SATIS12), fm = "pa", fa = "fa"))
+```
+
+Nu we op basis van het Knik-1 criterium en het Kaiser's criterium weten dat we2 factoren hebben gaan we deze factoranalyse uitvoeren. 
+
+```{r}
+library(GPArotation)
+fit <- fa(select(D, SATIS1 : SATIS12), nfactors = 2, rotate = "oblimin", fm = "pa")
+fit
+```
+
+## **Opdracht 6: Items hercoderen.**
+Op basis van de factoren die uit de vorige opdracht naar voren zijn gekomen wil je achterhalen of deze allemaal een betrouwbare schaal vormen. Indien dit het geval is kan je hierna variabelen aanmaken die je gaat gebruiken voor de daadwerkelijke analyses. Voor het zover is moet je eerst zorgen dat alle variabelen dezelfde meeteenheid hebben en in dezelfde richting gecodeerd
+staan. 
+
+Eerst controleren we welke variabelen gehercodeerd moeten worden. Om het overzichtelijk te houden is het wel zo makkelijk om nieuwe correlatiematrixen te maken.
+```{r}
+ctf1 <- corr.test(select(D, SATIS2, SATIS5, SATIS7, SATIS9, SATIS10, SATIS12))
+ctf1
+ctf2 <- corr.test(select(D, SATIS1, SATIS3, SATIS4, SATIS6, SATIS8, SATIS11))
+ctf2
+```
+
+Nu willen we het juiste item hercoderen. 
+
+```{r}
+D <- mutate(D, recSATIS8 = 8 - SATIS8) 
+D
+```
+
+
+## **Opdracht 7: Betrouwbaarheidsanalyse.**
+
+Nu de items allemaal dezelfde meeteenheid hebben en in dezelfde richting zijn gecodeerd kunnen we controleren of de verschillende schalen (op basis van de eerder gevonden factoren) betrouwbaar zijn. Voer nu 2 verschillende betrouwbaarheidsanalyses uit op basis van de 2 verschillende factoren.
+
+```{r}
+alpha(select(D, SATIS2, SATIS5, SATIS7, SATIS9, SATIS10, SATIS12)) 
+alpha(select(D, SATIS1, SATIS3, SATIS4, SATIS6, recSATIS8, SATIS11))
+```
+
+Indien we de variabele nog niet hadden gecodeerd, kunnen we de volgende code gebruiken. Daar is dan ook te zien of je een variabele moet hercoderen. 
+
+```{r}
+alpha(select(D, SATIS1, SATIS3, SATIS4, SATIS6, SATIS8, SATIS11), check.keys = T) 
+```
+
+### **Opdracht 8: Variabele aanmaken.**
+
+Nu we weten welke items we moeten gebruiken voor het vormen van twee betrouwbare schalen die onze variabelen zullen representeren kunnen we deze variabelen ook daadwerkelijk aanmaken.
+
+```{r}
+D <- mutate(D, Prestatietevredenheid = rowMeans(select(D, SATIS2, SATIS5, SATIS7, SATIS9, SATIS10, SATIS12), na.rm = T), Lichaamstevredenheid = rowMeans(select(D, SATIS1, SATIS3, SATIS4, SATIS6, recSATIS8, SATIS11), na.rm = T))
+D
+```
+
+### **Opdracht 9: Op eigen houtje.**
+Nu je twee schalen hebt voor alle SATIS-items is het tijd om te kijken of je één of meer schalen kan maken voor de items die zelfvertrouwen meten. Voer de hiervoor genoemde stappen uit en maak de nieuwe variabele(n) aan. Er zijn wel bijzondere gevallen waar je nu rekening moet houden.
+```{r}
+corr.test(select(D, SuWB1:SuWB7), alpha = T)
+print(fa.parallel(select(D, SuWB1 : SuWB7), fm = "pa", fa = "fa"))
+fit2 <- fa(select(D, SuWB1 : SuWB7), nfactors = 2, rotate = "oblimin", fm = "pa")
+fit2
+D <- mutate(D, recSuWB3 = 8 - SuWB3, recSuWB4 = 8 - SuWB4, recSuWB7 = 8 - SuWB7) 
+D
+alpha(select(D, SuWB1, SuWB2, recSuWB3, recSuWB4, SuWB5, SuWB6, recSuWB7))
+D <- mutate(D, SuWB = rowMeans(select(D, SuWB1, SuWB2, recSuWB3, recSuWB4, SuWB5, SuWB6, recSuWB7), na.rm = T))
+```
+
+### **Opdracht 10: Dataset overzichtelijk houden.**
+Indien je werkt met een grote dataset, of van nature wat chaotisch van aard bent, kan het fijn zijn om de items die je niet meer gebruikt te verwijderen.
+
+```{r}
+D <- select(D, Leeftijd:SNSaccount, Prestatietevredenheid, Lichaamstevredenheid, SuWB)
+D
+```
