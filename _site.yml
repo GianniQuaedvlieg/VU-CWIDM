@@ -1,11 +1,9 @@
 name: "CWIDM"
-navbar:
+navbar: 
   title: "Home"
-  left:
+  left: 
     - text: "Home"
       href: index.html
     - text: "Practicals"
-      href: Practicals.html
-    - text: "Links"
       href: Links.html
 output_dir: "docs"
