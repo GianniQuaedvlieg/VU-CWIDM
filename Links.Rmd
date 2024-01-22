@@ -45,4 +45,5 @@ Assignment:
 
 -   You can download the R-script [here](files/CWIDM_practicum_2_script%20(2).R?raw=true).
 
--   Assignment script and output (R-markdown)
+-   You can download the assignment script and output (R-markdown) [here](Practicum_2_markdown.Rmd).
+
