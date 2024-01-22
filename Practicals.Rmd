@@ -3,23 +3,43 @@ title: "Practicals"
 output: html_document
 ---
 
-### R and R-Studio
+Last changes: `r Sys.Date()`
 
-[R](http://www.r-project.org) is a free open-source programming language that can be used for statistical analysis, data-simulation, graphing, and lots of other stuff. Another free program is [R-studio](http://www.rstudio.com), that provides a nice graphic interface for R. Download R first, then download R-studio. Both can run on PCs, Macs or Linux. Students will be learning R in the stats labs using the lab manual .
+Here you can find the practicals of Communicatiewetenschapper in de maak (CWIDM). This is a pre-master course of the Vrije universiteit Amsterdam (VU). These practicals will discuss preperatory analyses using the package `tidyverse`, reliability analyses, linear regression models with moderation and mediation and AN(C)OVA with moderation. It is recommended to already download the packages on your computer before starting the practicals as it otherwise might take you some time during the completion of the practicals itself. The following packages are required for the practicals:
 
-### Additional R resources
+# Practical 1: Reliability analysis.
 
-1.  Google is great, Google your problem
-2.  [Stackoverflow](https://stackoverflow.com) is great, google will often take you there because someone has already asked your question, and someone else has answered, usually many people have answered your question many ways.
-3.  Danielle Navarro wrote a [free Psych Stats textbook using R](https://compcogscisydney.org/learning-statistics-with-r/), it's worth checking out (some of our textbook are based on Danielle's)
-4.  I am currently writing another stats textbook (incorporating some of the above). You can read it while it's being made right here <https://crumplab.github.io/statistics/>, also check out the lab manual for more specific things about doing various stats in R (also in draft right now) <https://crumplab.github.io/statisticsLab/>
-5.  Daniell Navarro recently made this website for introducing R, it's great, check it out (also made using this R markdown process): <http://compcogscisydney.org/psyr/>
-6.  Check out my slightly older programming book that also introduces R <https://crumplab.github.io/programmingforpsych/>
-7.  This is the definitive guide for all things R Markdown (you will find this very useful as you get better at this skill): <https://bookdown.org/yihui/rmarkdown/>
+Last changes: `r Sys.Date()`
 
-# Practical 2
+This week, you will learn how to conduct a lreliability analysis including a factoranalysis.
 
-Last compiled: `r Sys.Date()`
+This week, we will need the following packages:
+
+Video:
+
+-   Link to video reliability analysis:
+
+Dataset:
+
+-   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
+
+Assignment:
+
+-   Assignment description:
+
+    -   [View Assignment](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf)
+
+-   Assignment with answers
+
+    -   [View Answers](files/CWIDM_practicum_2_antwoorden.pdf)
+
+-   You can view the R-script [here](files/CWIDM_practicum_2_script%20(2).R).
+
+-   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).
+
+# Practical 2: Regression, mediation.
+
+Last changes: `r Sys.Date()`
 
 This week, you will learn how to conduct a linear regression with mediation. We will use the `lm`-function for this as well as Hayes-Process.
 
@@ -47,3 +67,92 @@ Assignment:
 
 -   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).
 
+# Practical 3: Regression, moderation.
+
+Last changes: `r Sys.Date()`
+
+This week, you will learn how to conduct a linear regression with moderation.
+
+This week, we will need the following packages:
+
+Video:
+
+-   Link to video regression with moderation:
+
+Dataset:
+
+-   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
+
+Assignment:
+
+-   Assignment description:
+
+    -   [View Assignment](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf)
+
+-   Assignment with answers
+
+    -   [View Answers](files/CWIDM_practicum_2_antwoorden.pdf)
+
+-   You can view the R-script [here](files/CWIDM_practicum_2_script%20(2).R).
+
+-   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).
+
+# Practical 5: AN(C)OVA.
+
+Last changes: `r Sys.Date()`
+
+This week, you will learn how to conduct an AN(C)OVA with moderation.
+
+This week, we will need the following packages:
+
+Video:
+
+-   Link to video AN(C)OVA with moderation:
+
+Dataset:
+
+-   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
+
+Assignment:
+
+-   Assignment description:
+
+    -   [View Assignment](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf)
+
+-   Assignment with answers
+
+    -   [View Answers](files/CWIDM_practicum_2_antwoorden.pdf)
+
+-   You can view the R-script [here](files/CWIDM_practicum_2_script%20(2).R).
+
+-   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).
+
+# Practical 6: Data cleaning.
+
+Last changes: `r Sys.Date()`
+
+This week, you will learn how to process your dataset in such a way that you can start with the analyses as discussed in previous practicals.
+
+This week, we will need the following packages:
+
+Video:
+
+-   Link to video datacleaning:
+
+Dataset:
+
+-   You can download the dataset for this week [here](files/CWIDM_practicum_2_dataset.csv?raw=true).
+
+Assignment:
+
+-   Assignment description:
+
+    -   [View Assignment](files/CWIDM_practicum_2_opdracht%20(1)%20(1).pdf)
+
+-   Assignment with answers
+
+    -   [View Answers](files/CWIDM_practicum_2_antwoorden.pdf)
+
+-   You can view the R-script [here](files/CWIDM_practicum_2_script%20(2).R).
+
+-   You can view the assignment script and output (R-markdown) [here](Practicum_2_markdown.html).

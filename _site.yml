@@ -6,9 +6,7 @@ navbar:
       href: index.html
     - text: "Practicals"
       href: Practicals.html
-css: |
-  .navbar {
-    background-color: blue;
-    color: white;  /* Text color */
-  }
 output_dir: "docs"
+
+
+
